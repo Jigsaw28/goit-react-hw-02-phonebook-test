@@ -28,6 +28,7 @@ export class PhonebookForm extends Component {
   };
 
   render() {
+    const {name, number} = this.state
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor={this.nameId}>Name</label>
@@ -35,7 +36,7 @@ export class PhonebookForm extends Component {
           type="text"
           name="name"
           id={this.nameId}
-          value={this.state.name}
+          value={name}
           onChange={this.handleChange}
           required
         />
@@ -44,7 +45,7 @@ export class PhonebookForm extends Component {
           type="tel"
           name="number"
           id={this.numberId}
-          value={this.state.number}
+          value={number}
           onChange={this.handleChange}
           required
         />
