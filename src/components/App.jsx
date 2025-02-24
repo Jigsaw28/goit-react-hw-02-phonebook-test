@@ -18,7 +18,13 @@ export class App extends Component {
 
   formSubmitHandler = ({ name, number }) => {
     const newContact = { name, number, id: nanoid() };
-    this.setState({ contacts: [...this.state.contacts, newContact] });
+    const doubleContact = this.state.contacts.find(
+      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+    );
+
+    doubleContact
+      ? alert(`${doubleContact.name} is already in contacts`)
+      : this.setState({ contacts: [...this.state.contacts, newContact] });
   };
 
   changeFilter = ({ target: { value } }) => {
@@ -31,12 +37,12 @@ export class App extends Component {
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
-  }
+  };
 
   render() {
     const { filter } = this.state;
-
     const visibleFilter = this.getFilterContacts();
+
     return (
       <Container>
         <h1>Phonebook</h1>
