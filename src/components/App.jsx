@@ -39,6 +39,10 @@ export class App extends Component {
     );
   };
 
+  deleteContact = contactId => {
+    this.setState(prevState=>({contacts: prevState.contacts.filter(contact=>contact.id!==contactId)}))
+  };
+
   render() {
     const { filter } = this.state;
     const visibleFilter = this.getFilterContacts();
@@ -49,7 +53,7 @@ export class App extends Component {
         <PhonebookForm onSubmit={this.formSubmitHandler} />
         <h2>Contacts</h2>
         <Filter filter={filter} onChange={this.changeFilter} />
-        <Contacts contacts={visibleFilter} />
+        <Contacts contacts={visibleFilter} deleteContact={this.deleteContact} />
       </Container>
     );
   }

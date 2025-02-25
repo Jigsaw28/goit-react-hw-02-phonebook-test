@@ -1,10 +1,16 @@
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
 
-export const Contacts = ({ contacts }) => {
+
+export const Contacts = ({ contacts, deleteContact }) => {
   return (
     <ul>
       {contacts.map(contact => (
-          <li key={nanoid()}>{contact.name}: {contact.number}</li>
+        <div key={nanoid()}>
+          <li>
+            {contact.name}: {contact.number}
+          </li>
+          <button type='button' onClick={()=>deleteContact(contact.id)} >Delete</button>
+        </div>
       ))}
     </ul>
   );
