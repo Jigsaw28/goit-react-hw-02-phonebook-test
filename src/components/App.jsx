@@ -1,9 +1,10 @@
-import { Component } from 'react';
-import { Container } from './App.styled';
-import { PhonebookForm } from './PhonebookForm/PhonebookForm';
-import { Contacts } from './Contacts/Contacts';
-import { nanoid } from 'nanoid';
-import { Filter } from './Filter/Filter';
+import { Container, Title } from "./App.styled";
+import { nanoid } from "nanoid";
+import { Component } from "react";
+import { Contacts } from "./Contacts/Contacts";
+import { Filter } from "./Filter/Filter";
+import { PhonebookForm } from "./PhonebookForm/PhonebookForm";
+
 
 export class App extends Component {
   state = {
@@ -34,13 +35,14 @@ export class App extends Component {
   getFilterContacts = () => {
     const { filter, contacts } = this.state;
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
 
   deleteContact = contactId => {
-    this.setState(prevState=>({contacts: prevState.contacts.filter(contact=>contact.id!==contactId)}))
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
   };
 
   render() {
@@ -49,9 +51,9 @@ export class App extends Component {
 
     return (
       <Container>
-        <h1>Phonebook</h1>
+        <Title>Phonebook</Title>
         <PhonebookForm onSubmit={this.formSubmitHandler} />
-        <h2>Contacts</h2>
+        <Title>Contacts</Title>
         <Filter filter={filter} onChange={this.changeFilter} />
         <Contacts contacts={visibleFilter} deleteContact={this.deleteContact} />
       </Container>
